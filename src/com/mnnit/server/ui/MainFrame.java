@@ -131,8 +131,14 @@ public class MainFrame extends javax.swing.JFrame {
                 public void run()
                 {
                       JFrame aboutFrame = new AboutFrame();
-                      aboutFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                      aboutFrame.setVisible(true);
+                      if(aboutFrame!=null){
+                        aboutFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        aboutFrame.setVisible(true);
+                      }
+                      else
+                      {
+                          System.out.println("About frame is null. Do something about it");
+                      }
                 }
             };
         th.start();
