@@ -21,7 +21,7 @@ public class MessageSender {
     private boolean connected = false;
     
     /** Multicast Socket */
-    private
+
     
     public MessageSender()
     {
