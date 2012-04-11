@@ -40,12 +40,5 @@ public class MessageSender {
         }
     }
     
-    public synchronized boolean startSender()
-    {
-        
-        if(!connected)
-        {
-            
-        }
-    }
+ 
 }
