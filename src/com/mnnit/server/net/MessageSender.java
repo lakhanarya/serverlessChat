@@ -38,7 +38,6 @@ public class MessageSender {
             address = InetAddress.getByName(ipAddress);
         } catch (UnknownHostException ex) {
             Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
             System.exit(1);
         }
     }
