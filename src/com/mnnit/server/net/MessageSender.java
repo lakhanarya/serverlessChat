@@ -1,6 +1,7 @@
 package com.mnnit.server.net;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
@@ -42,6 +43,28 @@ public class MessageSender {
         }
     }
    
+    public static void main (String args[])
+    {
+        MessageSender ms = new MessageSender("224.168.5.200", 40556);
+        ms.startSender();
+        ms.send("Hello");
+    }
+    
+    public synchronized void send(final String msg)
+    {
+        if(connected)
+        {
+            try {
+                byte[] encodedMsg = msg.getBytes();
+                int size = encodedMsg.length;
+                DatagramPacket packet = new DatagramPacket(encodedMsg, size, address, port);
+                mcSocket.send(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public synchronized void stopSender()
     {
         if(!connected)
