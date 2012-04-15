@@ -85,7 +85,7 @@ public class MessageReceiver implements Runnable {
 			try
 			{
 				DatagramPacket packet = new DatagramPacket(
-						new byte[1024], 1024 );
+						new byte[Defaults.packet_size], Defaults.packet_size );
 
 				if ( connected )
 				{
