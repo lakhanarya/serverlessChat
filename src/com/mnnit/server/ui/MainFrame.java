@@ -156,10 +156,7 @@ public class MainFrame extends javax.swing.JFrame {
             };
         th.start();
     }//GEN-LAST:event_settingsChatItemActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutChatItem;
     private javax.swing.JMenuItem clearChatMenuItem;
