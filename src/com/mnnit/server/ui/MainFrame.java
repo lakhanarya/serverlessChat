@@ -4,7 +4,8 @@
  */
 package com.mnnit.server.ui;
 
-import javax.swing.JFrame;
+import com.mnnit.server.model.SingletonUIResource;
+import javax.swing.*;
 
 /**
  *
@@ -12,11 +13,133 @@ import javax.swing.JFrame;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    public JMenuItem getAboutChatItem() {
+        return aboutChatItem;
+    }
+
+    public void setAboutChatItem(JMenuItem aboutChatItem) {
+        this.aboutChatItem = aboutChatItem;
+    }
+
+    public JMenuItem getClearChatMenuItem() {
+        return clearChatMenuItem;
+    }
+
+    public void setClearChatMenuItem(JMenuItem clearChatMenuItem) {
+        this.clearChatMenuItem = clearChatMenuItem;
+    }
+
+    public JMenuItem getConnectMenuItem() {
+        return connectMenuItem;
+    }
+
+    public void setConnectMenuItem(JMenuItem connectMenuItem) {
+        this.connectMenuItem = connectMenuItem;
+    }
+
+    public JMenu getFileMenu() {
+        return fileMenu;
+    }
+
+    public void setFileMenu(JMenu fileMenu) {
+        this.fileMenu = fileMenu;
+    }
+
+    public JMenu getHelpMenu() {
+        return helpMenu;
+    }
+
+    public void setHelpMenu(JMenu helpMenu) {
+        this.helpMenu = helpMenu;
+    }
+
+    public JMenuBar getjMenuBar1() {
+        return jMenuBar1;
+    }
+
+    public void setjMenuBar1(JMenuBar jMenuBar1) {
+        this.jMenuBar1 = jMenuBar1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JTextField getjTextField1() {
+        return jTextField1;
+    }
+
+    public void setjTextField1(JTextField jTextField1) {
+        this.jTextField1 = jTextField1;
+    }
+
+    public JTextArea getMainChatArea() {
+        return mainChatArea;
+    }
+
+    public void setMainChatArea(JTextArea mainChatArea) {
+        this.mainChatArea = mainChatArea;
+    }
+
+    public JMenuItem getQuitMenuItem() {
+        return quitMenuItem;
+    }
+
+    public void setQuitMenuItem(JMenuItem quitMenuItem) {
+        this.quitMenuItem = quitMenuItem;
+    }
+
+    public JMenuItem getSetAwayChatItem() {
+        return setAwayChatItem;
+    }
+
+    public void setSetAwayChatItem(JMenuItem setAwayChatItem) {
+        this.setAwayChatItem = setAwayChatItem;
+    }
+
+    public JMenuItem getSettingsChatItem() {
+        return settingsChatItem;
+    }
+
+    public void setSettingsChatItem(JMenuItem settingsChatItem) {
+        this.settingsChatItem = settingsChatItem;
+    }
+
+    public JMenu getToolsMenu() {
+        return toolsMenu;
+    }
+
+    public void setToolsMenu(JMenu toolsMenu) {
+        this.toolsMenu = toolsMenu;
+    }
+
+    public JList getUserList() {
+        return userList;
+    }
+
+    public void setUserList(JList userList) {
+        this.userList = userList;
+    }
+
     /**
      * Creates new form MainFrame
      */
+    
     public MainFrame() {
         initComponents();
+        SingletonUIResource singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
     }
 
     /**
@@ -54,6 +177,11 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(userList);
 
         jTextField1.setMaximumSize(new java.awt.Dimension(6, 2147483647));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         fileMenu.setText("File");
 
@@ -73,7 +201,7 @@ public class MainFrame extends javax.swing.JFrame {
         setAwayChatItem.setText("Set Away");
         toolsMenu.add(setAwayChatItem);
 
-        settingsChatItem.setText("Settings");
+        settingsChatItem.setText("change nick");
         settingsChatItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsChatItemActionPerformed(evt);
@@ -156,6 +284,11 @@ public class MainFrame extends javax.swing.JFrame {
             };
         th.start();
     }//GEN-LAST:event_settingsChatItemActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+        SingletonUIResource.getChatTextFieldController().parseAndActOnMessage();
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
