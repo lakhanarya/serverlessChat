@@ -1,6 +1,7 @@
 
 package com.mnnit.server.net;
 
+import com.mnnit.server.Defaults;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -28,11 +29,11 @@ public class MessageReceiver implements Runnable {
     /** Multicast Socket */
     private MulticastSocket mcSocket;
     
-    public static void main (String args[])
+    private Thread th;
+    
+    public MessageReceiver()
     {
-        MessageReceiver mr = new MessageReceiver("224.168.5.200", 40556);
-        mr.startReceiver();
-        mr.run();
+        this(Defaults.ipAddress, Defaults.port);
     }
     
     public MessageReceiver(final String ipAddress, final int port)
@@ -71,10 +72,13 @@ public class MessageReceiver implements Runnable {
 		}
             }
         }
+        if ( connected && ( th == null || !th.isAlive() ) )
+		{
+			startThread();
+		}
         return connected;
     }
 
-    @Override
     public void run() {
         while ( connected )
 		{
@@ -98,5 +102,10 @@ public class MessageReceiver implements Runnable {
 				e.printStackTrace();
 			}
 		}
+    }
+    
+    public void startThread() {
+        th = new Thread(this, "MessageReceiverThread");
+        th.start();
     }
 }
