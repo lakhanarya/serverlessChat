@@ -3,6 +3,7 @@ package com.mnnit.server;
 
 import com.mnnit.server.ui.MainFrame;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 /**
  *

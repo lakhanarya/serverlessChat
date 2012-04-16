@@ -38,7 +38,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="settingsChatItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Settings"/>
+                <Property name="text" type="java.lang.String" value="change nick"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingsChatItemActionPerformed"/>
@@ -154,6 +154,9 @@
           <Dimension value="[6, 2147483647]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
