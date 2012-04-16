@@ -17,6 +17,7 @@ public class UDPReceiver implements Runnable{
     private boolean connected;
     private DatagramSocket udpSocket;
     private Thread th;
+    private ReceiverListener listener;
     
     public void startUDPReceiver()
     {
@@ -76,6 +77,8 @@ public class UDPReceiver implements Runnable{
                 udpSocket.receive( packet );
                 String ip = packet.getAddress().getHostAddress();
                 String message = new String( packet.getData() ).trim();
+                if(listener!=null)
+                listener.messageReceived(message, ip);
             } catch (IOException ex) {
                 Logger.getLogger(UDPReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,4 +86,8 @@ public class UDPReceiver implements Runnable{
         }
     }
     
+    public void registerListener(ReceiverListener listener)
+    {
+        this.listener = listener;
+    }
 }

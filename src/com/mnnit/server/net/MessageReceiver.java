@@ -29,6 +29,9 @@ public class MessageReceiver implements Runnable {
     /** Multicast Socket */
     private MulticastSocket mcSocket;
     
+    /** Listener */
+    private ReceiverListener listener;
+    
     private Thread th;
     
     public MessageReceiver()
@@ -93,6 +96,8 @@ public class MessageReceiver implements Runnable {
 					String ip = packet.getAddress().getHostAddress();
 					String message = new String( packet.getData() ).trim();
 					System.out.println( "Message arrived from " + ip + ": " + message );
+                                        if(listener!=null)
+                                        listener.messageReceived(message, ip);
 				}
 			}
 
@@ -107,5 +112,10 @@ public class MessageReceiver implements Runnable {
     public void startThread() {
         th = new Thread(this, "MessageReceiverThread");
         th.start();
+    }
+    
+    public void registerListener(ReceiverListener listener)
+    {
+        this.listener=listener;
     }
 }
