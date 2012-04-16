@@ -1,5 +1,6 @@
 package com.mnnit.server.net;
 
+import com.mnnit.server.Defaults;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -28,7 +29,7 @@ public class MessageSender {
     
     public MessageSender()
     {
-        
+        this(Defaults.ipAddress, Defaults.port);
     }
     
     public MessageSender(final String ipAddress, final int port)
@@ -42,14 +43,7 @@ public class MessageSender {
         }
     }
    
-    public static void main (String args[])
-    {
-        MessageSender ms = new MessageSender("224.168.5.200", 40556);
-        ms.startSender();
-        ms.send("Hello");
-    }
-    
-    public synchronized void send(final String msg)
+    public synchronized boolean send(final String msg)
     {
         if(connected)
         {
@@ -58,10 +52,12 @@ public class MessageSender {
                 int size = encodedMsg.length;
                 DatagramPacket packet = new DatagramPacket(encodedMsg, size, address, port);
                 mcSocket.send(packet);
+                return true;
             } catch (IOException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return false;
     }
     
     public synchronized void stopSender()
