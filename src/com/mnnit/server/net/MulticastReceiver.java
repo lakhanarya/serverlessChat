@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Lakhan
  */
-public class MessageReceiver implements Runnable {
+public class MulticastReceiver implements Runnable {
     
     
     /** Address for multicasting */
@@ -34,18 +34,18 @@ public class MessageReceiver implements Runnable {
     
     private Thread th;
     
-    public MessageReceiver()
+    public MulticastReceiver()
     {
         this(Defaults.ipAddress, Defaults.port);
     }
     
-    public MessageReceiver(final String ipAddress, final int port)
+    public MulticastReceiver(final String ipAddress, final int port)
     {
         this.port = port;
         try {
             address = InetAddress.getByName(ipAddress);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MulticastSender.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
     }

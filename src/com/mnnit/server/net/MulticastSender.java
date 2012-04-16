@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Lakhan
  */
-public class MessageSender {
+public class MulticastSender {
     
     /** Address for multicasting */
     private InetAddress address;
@@ -27,18 +27,18 @@ public class MessageSender {
     /** Multicast Socket */
     private MulticastSocket mcSocket;
     
-    public MessageSender()
+    public MulticastSender()
     {
         this(Defaults.ipAddress, Defaults.port);
     }
     
-    public MessageSender(final String ipAddress, final int port)
+    public MulticastSender(final String ipAddress, final int port)
     {
         this.port = port;
         try {
             address = InetAddress.getByName(ipAddress);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MulticastSender.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
     }
@@ -54,7 +54,7 @@ public class MessageSender {
                 mcSocket.send(packet);
                 return true;
             } catch (IOException ex) {
-                Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MulticastSender.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return false;
@@ -74,7 +74,7 @@ public class MessageSender {
                        mcSocket.leaveGroup(address);
             }
                  catch (IOException ex) {
-                    Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MulticastSender.class.getName()).log(Level.SEVERE, null, ex);
                 }
             if(!mcSocket.isClosed())
             {

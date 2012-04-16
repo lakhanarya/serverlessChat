@@ -6,17 +6,17 @@ package com.mnnit.server.net;
  */
 public class NetworkService {
 
-    private MessageReceiver messageReceiver;
+    private MulticastReceiver messageReceiver;
     
-    private MessageSender messageSender;
+    private MulticastSender messageSender;
     
     private UDPSender udpSender;
     
     private UDPReceiver udpReceiver;
     
     public NetworkService (){
-        messageReceiver = new MessageReceiver();
-        messageSender = new MessageSender();
+        messageReceiver = new MulticastReceiver();
+        messageSender = new MulticastSender();
         udpSender = new UDPSender();
         udpReceiver = new UDPReceiver();
     }
