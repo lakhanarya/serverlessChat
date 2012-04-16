@@ -33,7 +33,7 @@ public class SingletonUIResource {
         this.mainChatController = mainChatController;
     }
 
-    public NetworkController getNetworkController(NetworkController networkController)
+    public NetworkController getNetworkController()
     {
         return networkController;
     }

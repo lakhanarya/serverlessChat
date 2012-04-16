@@ -18,6 +18,11 @@ public class UDPSender {
     private DatagramSocket udpSocket;
     private boolean connected;
     
+    public UDPSender()
+    {
+        
+    }
+    
     public boolean send(String msg, String ip, int port)
     {
         if(connected)

@@ -140,6 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
+        singletonUIResource.getNetworkController().logOn();
     }
 
     /**
@@ -287,6 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         singletonUIResource.getChatTextFieldController().parseAndActOnMessage();
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private SingletonUIResource singletonUIResource;

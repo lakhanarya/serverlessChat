@@ -22,22 +22,23 @@ public class ChatTextFieldController {
     public void parseAndActOnMessage()
     {
         String message = writingArea.getText() ;
+                writingArea.setText("");
         if(message.startsWith("/"))
         {
             /*A shell command*/
-            parseAndExecuteCommand();
+            parseAndExecuteCommand(message);
             return ;
         }
         else
         {
             /*A normal message*/
-            SendToMainChat(message); 
+            resource.getNetworkController().sendChatMessage(message); 
         }
     }
     
     private JTextField writingArea ; /* The writing area for the Main Chat*/
     private SingletonUIResource resource;
-    private void parseAndExecuteCommand() {
+    private void parseAndExecuteCommand(String message) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -45,7 +46,6 @@ public class ChatTextFieldController {
         /*We need a global instance of the mainChat . For it , we also need to create a singleton*/
         MainChatController mainChatController = resource.getMainChatController();
         mainChatController.writeToMainChat(message);
-        writingArea.setText("");
         return ;
     }
 }

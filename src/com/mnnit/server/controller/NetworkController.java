@@ -32,5 +32,8 @@ public class NetworkController {
         networkService.startNetworkService();
     }
     
-    
+    public void sendChatMessage(String msg)
+    {
+        networkService.sendMulticastMessage(msg);
+    }
 }
