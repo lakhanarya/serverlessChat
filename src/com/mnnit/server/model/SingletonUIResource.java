@@ -6,6 +6,7 @@ package com.mnnit.server.model;
 
 import com.mnnit.server.controller.ChatTextFieldController;
 import com.mnnit.server.controller.MainChatController;
+import com.mnnit.server.controller.NetworkController;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
  */
 public class SingletonUIResource {
 
-    public static ChatTextFieldController getChatTextFieldController() {
+    public ChatTextFieldController getChatTextFieldController() {
         return chatTextFieldController;
     }
 
@@ -24,7 +25,7 @@ public class SingletonUIResource {
         this.chatTextFieldController = chatTextFieldController;
     }
 
-    public static MainChatController getMainChatController() {
+    public MainChatController getMainChatController() {
         return mainChatController;
     }
 
@@ -32,16 +33,25 @@ public class SingletonUIResource {
         this.mainChatController = mainChatController;
     }
 
-        
-    public static JTextField getWritingArea() {
+    public NetworkController getNetworkController(NetworkController networkController)
+    {
+        return networkController;
+    }
+    
+    public void setNetworkController(NetworkController networkController)
+    {
+        this.networkController = networkController;
+    }
+    
+    public JTextField getWritingArea() {
         return mainChatField ;
     }
 
-    public static JTextArea getMainChatArea() {
+    public JTextArea getMainChatArea() {
         return mainChatArea ;
     }
     
-    public static JList getUserList()
+    public JList getUserList()
     {
         return userList ;
     }
@@ -53,14 +63,16 @@ public class SingletonUIResource {
         this.mainChatField = mainChatField ;
         this.userList = userList ;
         
-        mainChatController = new MainChatController();
-        chatTextFieldController = new ChatTextFieldController();
+        mainChatController = new MainChatController(this);
+        chatTextFieldController = new ChatTextFieldController(this);
+        networkController = new NetworkController(this);
     }
     
-    private static JTextArea mainChatArea ;
-    private static JTextField mainChatField ;
-    private static JList userList ;
+    private JTextArea mainChatArea ;
+    private JTextField mainChatField ;
+    private JList userList ;
     
-    private static MainChatController mainChatController ;
-    private static ChatTextFieldController chatTextFieldController ;
+    private MainChatController mainChatController ;
+    private ChatTextFieldController chatTextFieldController ;
+    private NetworkController networkController;
 }

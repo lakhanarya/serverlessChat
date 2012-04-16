@@ -4,12 +4,25 @@
  */
 package com.mnnit.server.net;
 
+import com.mnnit.server.controller.MainChatController;
+import com.mnnit.server.model.SingletonUIResource;
+
 /**
  *
  * @author Lakhan
  */
-public interface ReceiverListener {
+public class ReceiverListener {
     
-    public void messageReceived(String message, String ipAddress);
+    private MainChatController chatController;
+    
+    public ReceiverListener (SingletonUIResource resource)
+    {
+        this.chatController = resource.getMainChatController();
+    }
+    
+    public void messageReceived(String message, String ipAddress)
+    {
+        chatController.writeToMainChat(message);
+    }
     
 }

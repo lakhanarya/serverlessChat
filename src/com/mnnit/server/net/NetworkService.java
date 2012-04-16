@@ -37,4 +37,13 @@ public class NetworkService {
     {
         return udpSender.send(msg, ip, port);
     }
+    
+    public void setReceiverListener(ReceiverListener listener)
+    {
+        messageReceiver.registerListener(listener);
+    }
+    public void setUDPListener(ReceiverListener listener)
+    {
+        udpReceiver.registerListener(listener);
+    }
 }

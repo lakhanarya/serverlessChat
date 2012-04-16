@@ -14,9 +14,10 @@ import javax.swing.JTextField;
  */
 public class ChatTextFieldController {
     
-    public ChatTextFieldController()
+    public ChatTextFieldController(SingletonUIResource resource)
     {
-        this.writingArea = SingletonUIResource.getWritingArea() ;
+        this.resource = resource;
+        this.writingArea = resource.getWritingArea() ;
     }
     public void parseAndActOnMessage()
     {
@@ -35,14 +36,14 @@ public class ChatTextFieldController {
     }
     
     private JTextField writingArea ; /* The writing area for the Main Chat*/
-
+    private SingletonUIResource resource;
     private void parseAndExecuteCommand() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     private void SendToMainChat(String message) {
         /*We need a global instance of the mainChat . For it , we also need to create a singleton*/
-        MainChatController mainChatController = SingletonUIResource.getMainChatController();
+        MainChatController mainChatController = resource.getMainChatController();
         mainChatController.writeToMainChat(message);
         writingArea.setText("");
         return ;

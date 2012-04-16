@@ -14,9 +14,9 @@ import javax.swing.JTextArea;
  * @author darth
  */
 public class MainChatController {
-    public MainChatController()
+    public MainChatController(SingletonUIResource resource)
     {
-        this.mainChatArea = SingletonUIResource.getMainChatArea();
+        this.mainChatArea = resource.getMainChatArea();
     }
     public void writeToMainChat(String mainChatMessage)
     {

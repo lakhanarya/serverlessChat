@@ -139,7 +139,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
-        SingletonUIResource singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
+        singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
     }
 
     /**
@@ -286,10 +286,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsChatItemActionPerformed
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        SingletonUIResource.getChatTextFieldController().parseAndActOnMessage();
+        singletonUIResource.getChatTextFieldController().parseAndActOnMessage();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-
+    private SingletonUIResource singletonUIResource;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutChatItem;
     private javax.swing.JMenuItem clearChatMenuItem;
