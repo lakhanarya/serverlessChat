@@ -5,7 +5,6 @@
 package com.mnnit.server.controller;
 
 import com.mnnit.server.model.SingletonUIResource;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
