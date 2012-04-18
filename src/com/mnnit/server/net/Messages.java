@@ -3,7 +3,7 @@
  */
 package com.mnnit.server.net;
 
-import com.mnnit.server.model.EnvironmentalSettings;
+import com.mnnit.server.model.Settings;
 import com.mnnit.server.model.User;
 
 /**
@@ -19,7 +19,7 @@ public class Messages {
     public Messages(final NetworkService networkService)
     {
         this.networkService = networkService;
-        this.me = EnvironmentalSettings.getMe();
+        this.me = Settings.getSettings().getMe();
     }
     
     public void sendLogonMsg()
@@ -28,6 +28,12 @@ public class Messages {
         networkService.sendMulticastMessage(msg);
     }
     
+    public void sendChatMessage(String msg)
+    {
+        String message = createMessage("CHAT");
+        message += "@" + msg;
+        networkService.sendMulticastMessage(message);
+    }
     
     public String createMessage(final String type)
     {

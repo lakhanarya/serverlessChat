@@ -96,11 +96,4 @@ public class UserListController {
     private int getUserIndex(User user) {
         return uList.indexOf(user);
     }
-
-    public User createNewUser() {
-        int code = 10000000 + (int) ( Math.random() * 9999999 );
-        
-        User user = new User("nick", code);
-        return user;
-    }
 }
