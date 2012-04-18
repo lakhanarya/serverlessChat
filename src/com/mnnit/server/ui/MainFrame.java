@@ -141,18 +141,16 @@ public class MainFrame extends javax.swing.JFrame {
         this.userList = userList;
     }
 
+    
     /**
      * Creates new form MainFrame
      */
     
     public MainFrame() {
         initComponents();
-        SingletonUIResource singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
+        resource = new SingletonUIResource(mainChatArea, jTextField1, userList);
         
         defaultListModel = new DefaultListModel() ;
-        defaultListModel.addElement("Lakhan");
-        defaultListModel.addElement("Aishani");
-        defaultListModel.addElement("Nood");
         userList.setModel(defaultListModel);
         
         
@@ -359,13 +357,11 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        SingletonUIResource.getChatTextFieldController().parseAndActOnMessage();
+        resource.getChatTextFieldController().parseAndActOnMessage();
     }//GEN-LAST:event_jTextField1ActionPerformed
     
     private String userSelected = null ;
-    /**
-     * @param args the command line arguments
-     */
+    private SingletonUIResource resource;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutChatItem;
     private javax.swing.JMenuItem clearChatMenuItem;
