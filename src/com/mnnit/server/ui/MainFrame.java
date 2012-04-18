@@ -5,7 +5,15 @@
 package com.mnnit.server.ui;
 
 import com.mnnit.server.model.SingletonUIResource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 /**
  *
@@ -140,8 +148,72 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         SingletonUIResource singletonUIResource = new SingletonUIResource(mainChatArea, jTextField1, userList);
-    }
+        
+        defaultListModel = new DefaultListModel() ;
+        defaultListModel.addElement("Lakhan");
+        defaultListModel.addElement("Aishani");
+        defaultListModel.addElement("Nood");
+        userList.setModel(defaultListModel);
+        
+        
+        /* adding the mouse listener to the list */
+        userList.addMouseListener(new MouseAdapter() {
+               public void mousePressed(MouseEvent e)
+               {
+                   if(e.isPopupTrigger())
+                       doPop(e);
+               }
+               
+               public void mouseReleased(MouseEvent e)
+               {
+                   if(e.isPopupTrigger())
+                       doPop(e);
+               }
+               
+               public void doPop(MouseEvent e)
+               {
+                   PopUpMenu popUpMenu =  new PopUpMenu();
+                   popUpMenu.showUser(e.getComponent(), e.getX(), e.getY() , userSelected);
+               }
+            });       
+               ListSelectionListener listSelectionListener = new ListSelectionListener() {
 
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    /** Get the particular element selected and act on it accordingly 
+                     *  This method is still under Beta Phase and does not have any
+                     *  reliability associated with it .This is sparta !!
+                     */
+                    System.out.println("first selection : " + e.getFirstIndex());
+                    System.out.println("last selection : " + e.getLastIndex());
+                    
+                    boolean adjust = e.getValueIsAdjusting();
+                    System.out.println(" adjusting ? "+ adjust);
+                    if(!adjust)
+                    {
+                        JList list = (JList) e.getSource() ;
+                        int selections[] = list.getSelectedIndices() ;
+                        Object selectionvalues[] = list.getSelectedValues() ;
+                        for(int i = 0 ; i< selections.length ; i++)
+                        {
+                            if(i==0)
+                                System.out.println("Selections :");
+                            System.out.println(selections[i]+ "/"+ selectionvalues[i]);
+                            userSelected = (String) selectionvalues[i];
+                        }
+                    }
+                }
+            };
+            userList.addListSelectionListener(listSelectionListener);
+    }
+    
+    public void populateUserList(DefaultListModel listModel)
+    {
+        if(listModel==null)
+               throw new NullPointerException("the jlist is null");
+        else 
+            userList.setModel(listModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,12 +356,13 @@ public class MainFrame extends javax.swing.JFrame {
             };
         th.start();
     }//GEN-LAST:event_settingsChatItemActionPerformed
-
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         SingletonUIResource.getChatTextFieldController().parseAndActOnMessage();
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
+    private String userSelected = null ;
     /**
      * @param args the command line arguments
      */
@@ -310,4 +383,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JList userList;
     // End of variables declaration//GEN-END:variables
+    private DefaultListModel defaultListModel ;
 }
