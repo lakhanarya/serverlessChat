@@ -150,8 +150,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         resource = new SingletonUIResource(mainChatArea, jTextField1, userList);
         
-        defaultListModel = new DefaultListModel() ;
-        userList.setModel(defaultListModel);
+        resource.getNetworkController().logOn();
         
         
         /* adding the mouse listener to the list */
@@ -356,7 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsChatItemActionPerformed
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+
         resource.getChatTextFieldController().parseAndActOnMessage();
     }//GEN-LAST:event_jTextField1ActionPerformed
     
@@ -379,5 +378,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JList userList;
     // End of variables declaration//GEN-END:variables
-    private DefaultListModel defaultListModel ;
+
 }

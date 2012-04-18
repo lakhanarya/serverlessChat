@@ -1,5 +1,7 @@
 package com.mnnit.server.net;
 
+import com.mnnit.server.event.ReceiverListener;
+
 /**
  *
  * @author Lakhan

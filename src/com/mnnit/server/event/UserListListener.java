@@ -1,6 +1,8 @@
 
-package com.mnnit.server.model;
+package com.mnnit.server.event;
 
+import com.mnnit.server.model.SingletonUIResource;
+import com.mnnit.server.model.User;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
@@ -16,7 +18,8 @@ public class UserListListener {
     public UserListListener(SingletonUIResource resource)
     {
         this.resource=resource;
-        listModel=(DefaultListModel) resource.getUserList().getModel();
+        listModel = new DefaultListModel();
+        resource.getUserList().setModel(listModel);
     }
     
     public void userAdded(User user) {

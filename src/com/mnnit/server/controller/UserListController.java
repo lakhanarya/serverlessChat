@@ -1,7 +1,8 @@
 package com.mnnit.server.controller;
 
+import com.mnnit.server.model.SingletonUIResource;
 import com.mnnit.server.model.User;
-import com.mnnit.server.model.UserListListener;
+import com.mnnit.server.event.UserListListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,10 @@ public class UserListController {
     private List<User> uList;
     private UserListListener listener;
     
-    public UserListController()
+    public UserListController(SingletonUIResource resource)
     {
         createUserList();
+        this.listener = new UserListListener(resource);
     }
     
     public void createUserList()

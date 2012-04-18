@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mnnit.server.net;
+package com.mnnit.server.event;
 
 import com.mnnit.server.controller.MainChatController;
 import com.mnnit.server.model.SingletonUIResource;

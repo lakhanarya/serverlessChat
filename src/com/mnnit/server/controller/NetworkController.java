@@ -1,8 +1,9 @@
 package com.mnnit.server.controller;
 
 import com.mnnit.server.model.SingletonUIResource;
+import com.mnnit.server.model.User;
 import com.mnnit.server.net.NetworkService;
-import com.mnnit.server.net.ReceiverListener;
+import com.mnnit.server.event.ReceiverListener;
 
 /**
  *
@@ -30,6 +31,8 @@ public class NetworkController {
     public void logOn()
     {
         networkService.startNetworkService();
+        User user = new User("nick", 123);
+        resource.getUserListController().add(user);
     }
     
     public void sendChatMessage(String msg)

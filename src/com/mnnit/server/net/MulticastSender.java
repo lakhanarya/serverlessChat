@@ -57,6 +57,8 @@ public class MulticastSender {
                 Logger.getLogger(MulticastSender.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else 
+         System.out.println("Network Service not started" );
         return false;
     }
     

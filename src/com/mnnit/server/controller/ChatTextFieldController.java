@@ -25,8 +25,7 @@ public class ChatTextFieldController {
         if(message.startsWith("/"))
         {
             /*A shell command*/
-            parseAndExecuteCommand(message);
-            
+            parseAndExecuteCommand(message);        
         }
         else
         {
