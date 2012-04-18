@@ -45,6 +45,6 @@ public class ChatTextFieldController {
         /*We need a global instance of the mainChat . For it , we also need to create a singleton*/
         MainChatController mainChatController = resource.getMainChatController();
         mainChatController.writeToMainChat(message);
-        return ;
+        
     }
 }
