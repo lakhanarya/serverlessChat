@@ -26,7 +26,7 @@ public class ChatTextFieldController {
         {
             /*A shell command*/
             parseAndExecuteCommand(message);
-            return ;
+            
         }
         else
         {
