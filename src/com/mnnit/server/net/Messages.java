@@ -28,6 +28,7 @@ public class Messages {
         networkService.sendMulticastMessage(msg);
     }
     
+    
     public String createMessage(final String type)
     {
         return me.getCode() + "#" + type + "!" + me.getNick();
