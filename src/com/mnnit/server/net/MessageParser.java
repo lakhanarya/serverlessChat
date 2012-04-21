@@ -31,9 +31,9 @@ public class MessageParser {
             mainMsg = msg.substring(ind+1, msg.length()-1);
             if("CHAT".equals(type))
                 chatController.writeToMainChat(nick + "> " + mainMsg);
-            else if ("NICK".equals(nick))
+            else if ("NICK".equals(type))
             {
-                resource.getUserListController().getUserByNick(nick).setNick(mainMsg);
+                resource.getUserListController().changeNick(nick, mainMsg);
             }
         }
         else

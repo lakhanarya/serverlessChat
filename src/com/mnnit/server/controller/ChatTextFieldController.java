@@ -42,6 +42,7 @@ public class ChatTextFieldController {
             else
             {
             String nick = msg.substring(5);
+            
             resource.getNetworkController().sendNickChangeMessage(nick);
         
             }

@@ -92,8 +92,25 @@ public class UserListController {
         }
         return null;
     }
-
+    
+    public void changeNick(User user, String nick)
+    {
+        if(user!=null)
+        {
+        int ind = getUserIndex(user);
+        user.setNick(nick);
+        uList.set(ind, user);
+        if(listener!=null)
+            listener.userNickChanged(user, ind);
+    
+        }
+    }
+    
     private int getUserIndex(User user) {
         return uList.indexOf(user);
+    }
+
+    public void changeNick(String nick, String mainMsg) {
+        changeNick(getUserByNick(nick), mainMsg);
     }
 }

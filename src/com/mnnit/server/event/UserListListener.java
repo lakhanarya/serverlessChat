@@ -31,4 +31,7 @@ public class UserListListener {
         listModel.removeElementAt(index);
     }
     
+    public void userNickChanged(User user, int ind) {
+        listModel.setElementAt(user, ind);
+    }
 }
