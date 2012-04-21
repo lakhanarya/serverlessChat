@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mnnit.server.event;
 
 import com.mnnit.server.controller.MainChatController;
 import com.mnnit.server.model.SingletonUIResource;
+import com.mnnit.server.net.MessageParser;
 
 /**
  *
@@ -14,18 +11,17 @@ import com.mnnit.server.model.SingletonUIResource;
 public class ReceiverListener {
     
     private MainChatController chatController;
+    private MessageParser parser;
     
     public ReceiverListener (SingletonUIResource resource)
     {
         this.chatController = resource.getMainChatController();
+        parser = new MessageParser(resource);
+        
     }
     
     public void messageReceived(String message, String ipAddress)
     {
-        chatController.writeToMainChat(message);
+        parser.parseMsg(message);
     }
-/**
- *
- * @author Lakhan
- */
 }

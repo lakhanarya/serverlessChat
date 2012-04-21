@@ -22,22 +22,30 @@ public class ChatTextFieldController {
     {
         String message = writingArea.getText() ;
                 writingArea.setText("");
+            resource.getNetworkController().sendChatMessage(message); 
         if(message.startsWith("/"))
         {
             /*A shell command*/
             parseAndExecuteCommand(message);        
-        }
-        else
-        {
-            /*A normal message*/
-            resource.getNetworkController().sendChatMessage(message); 
         }
     }
     
     private JTextField writingArea ; /* The writing area for the Main Chat*/
     private SingletonUIResource resource;
     private void parseAndExecuteCommand(String message) {
-        throw new UnsupportedOperationException("Not yet implemented");
+
+        String msg = message.substring(1);
+        if(msg.startsWith("nick"))
+        {
+            if(msg.length()<=6)
+                System.out.println("Specify Nick");
+            else
+            {
+            String nick = msg.substring(5);
+            resource.getNetworkController().sendNickChangeMessage(nick);
+        
+            }
+        }
     }
 
     private void SendToMainChat(String message) {

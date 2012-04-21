@@ -31,8 +31,39 @@ public class Messages {
     public void sendChatMessage(String msg)
     {
         String message = createMessage("CHAT");
-        message += "@" + msg;
+        message += "[" + msg + "]";
         networkService.sendMulticastMessage(message);
+    }
+    
+    public void sendLogoff()
+    {
+        String msg = createMessage("LOGOFF");
+        networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendExposeMsg()
+    {
+        String msg = createMessage("EXPOSE");
+        networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendExposingMsg()
+    {
+        String msg = createMessage("EXPOSING");
+        networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendChangeNickMsg(String nick)
+    {
+        String msg = createMessage("NICK");
+        msg += "[" + nick + "]";
+        networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendNickCrashMsg()
+    {
+        String msg = createMessage("NICKCRASH");
+        networkService.sendMulticastMessage(msg);
     }
     
     public String createMessage(final String type)

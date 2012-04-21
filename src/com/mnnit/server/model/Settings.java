@@ -10,14 +10,16 @@ package com.mnnit.server.model;
  */
 public final class Settings {
 
-    private User me;
+    private static User me;
     private static final Settings SETTINGS = new Settings();
     
     private Settings()
     {
         int code = 10000000 + (int) ( Math.random() * 9999999 );
         
-        me = new User("nick", code);
+        String nick = System.getProperty("user.name");
+        
+        me = new User(nick, code);
         me.setMe(true);
     }
 

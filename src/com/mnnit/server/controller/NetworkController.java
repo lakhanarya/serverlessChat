@@ -39,4 +39,9 @@ public class NetworkController {
     {
         messages.sendChatMessage(msg);
     }
+    
+    public void sendNickChangeMessage(String nick)
+    {
+        messages.sendChangeNickMsg(nick);
+    }
 }
