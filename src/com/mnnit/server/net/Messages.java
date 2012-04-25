@@ -27,6 +27,18 @@ public class Messages {
         String msg = createMessage("LOGON");
         networkService.sendMulticastMessage(msg);
     }
+   
+    public void sendIdleMessage()
+    {
+        String msg = createMessage("IDLE");
+        networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendBackMessage()
+    {
+        String msg = createMessage("BACK");
+        networkService.sendMulticastMessage(msg);
+    }
     
     public void sendChatMessage(String msg)
     {
