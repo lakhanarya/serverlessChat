@@ -22,6 +22,6 @@ public class ReceiverListener {
     
     public void messageReceived(String message, String ipAddress)
     {
-        parser.parseMsg(message);
+        parser.parseMsg(message, ipAddress);
     }
 }

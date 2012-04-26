@@ -21,6 +21,7 @@ public final class Settings {
         
         me = new User(nick, code);
         me.setMe(true);
+        me.setOperatingSystem(System.getProperty("os.name"));
     }
 
     public User getMe()

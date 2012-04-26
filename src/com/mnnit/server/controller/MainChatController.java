@@ -31,6 +31,19 @@ public class MainChatController {
         }
     }
     
+    public void writeToMainChat(String mainChatMessage, String nick)
+    {
+        if(mainChatMessage==null)
+        {
+            throw new NullPointerException("main chat message is NULL");
+        }
+        else
+        {
+            /*By default , the messages are appended to the main Chat Frame*/
+            mainChatArea.append(nick + "> " + mainChatMessage +"\n");
+        }
+    }
+    
     public void clearMainChat()
     {
         mainChatArea.setText("");

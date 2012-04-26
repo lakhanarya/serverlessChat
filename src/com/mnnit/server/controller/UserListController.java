@@ -93,8 +93,19 @@ public class UserListController {
         return null;
     }
     
-    public void changeNick(User user, String nick)
+    public boolean isNickInUse(String nick)
     {
+        for(int i=0; i<uList.size(); i++)
+        {
+             if(uList.get(i).getNick() == null ? nick == null : uList.get(i).getNick().equals(nick))
+                 return true;
+        }
+        return false;
+    }
+    
+    public void changeNick(int code, String nick)
+    {
+        User user = getUserByCode(code);
         if(user!=null)
         {
         int ind = getUserIndex(user);
@@ -108,9 +119,5 @@ public class UserListController {
     
     private int getUserIndex(User user) {
         return uList.indexOf(user);
-    }
-
-    public void changeNick(String nick, String mainMsg) {
-        changeNick(getUserByNick(nick), mainMsg);
     }
 }

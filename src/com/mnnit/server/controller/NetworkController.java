@@ -33,6 +33,7 @@ public class NetworkController {
         User user = Settings.getSettings().getMe();
         resource.getUserListController().add(user);
         messages.sendLogonMsg();
+        messages.sendExposeMsg();
     }
     
     public void sendChatMessage(String msg)
@@ -43,5 +44,13 @@ public class NetworkController {
     public void sendNickChangeMessage(String nick)
     {
         messages.sendChangeNickMsg(nick);
+    }
+
+    public void sendNickCrashMessage(String nick) {
+        messages.sendNickCrashMsg(nick);
+    }
+
+    public void sendExposingMessage() {
+       messages.sendExposingMsg(); 
     }
 }

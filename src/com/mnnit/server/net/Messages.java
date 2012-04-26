@@ -68,14 +68,19 @@ public class Messages {
     public void sendChangeNickMsg(String nick)
     {
         String msg = createMessage("NICK");
-        msg += "[" + nick + "]";
+        msg += ":" + nick;
         networkService.sendMulticastMessage(msg);
     }
     
-    public void sendNickCrashMsg()
+    public void sendNickCrashMsg(String nick)
     {
-        String msg = createMessage("NICKCRASH");
+        String msg = createMessage("NICKCRASH") + ":" + nick;
         networkService.sendMulticastMessage(msg);
+    }
+    
+    public void sendClientMsg()
+    {
+       
     }
     
     public String createMessage(final String type)
