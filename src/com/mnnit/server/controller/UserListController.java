@@ -62,7 +62,7 @@ public class UserListController {
         {
             uList.remove(user);
             if(listener!=null)
-                listener.userRemoved(getUserIndex(user));
+                listener.userRemoved(user);
         }
     }
     

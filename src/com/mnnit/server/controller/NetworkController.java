@@ -53,4 +53,8 @@ public class NetworkController {
     public void sendExposingMessage() {
        messages.sendExposingMsg(); 
     }
+
+    public void sendLogoffMessage() {
+        messages.sendLogoff();
+    }
 }

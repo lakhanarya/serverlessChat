@@ -27,7 +27,8 @@ public class UserListListener {
         listModel.addElement(user);
     }
 
-    public void userRemoved(int index) {
+    public void userRemoved(User user) {
+        int index = listModel.indexOf(user);
         listModel.removeElementAt(index);
     }
     
