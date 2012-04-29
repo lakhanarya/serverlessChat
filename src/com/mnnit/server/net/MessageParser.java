@@ -84,5 +84,21 @@ public class MessageParser {
                 responder.userLogoff(nick);
             }
         }
+        else if ("IDLE".equals(type))
+        {
+            if(code != Settings.getSettings().getMe().getCode())
+            {
+                nick = msg.substring(ind2+1);
+                responder.userIdle(nick);
+            }
+        }
+        else if ("BACK".equals(type))
+        {
+            if(code != Settings.getSettings().getMe().getCode())
+            {
+                nick = msg.substring(ind2+1);
+                responder.userBack(nick);
+            }
+        }
     }
 }

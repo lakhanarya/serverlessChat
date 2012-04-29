@@ -57,4 +57,17 @@ public class NetworkController {
     public void sendLogoffMessage() {
         messages.sendLogoff();
     }
+
+    public void sendIdleMessage() {
+        messages.sendIdleMessage();
+    }
+
+    public void sendBackMessage() {
+        messages.sendBackMessage();
+    }
+    
+    public void sendPrivateChatMessage(String msg, String ip)
+    {
+        messages.sendPrivateMsg(msg, ip);
+    }
 }

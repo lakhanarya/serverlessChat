@@ -1,5 +1,7 @@
 package com.mnnit.server.model;
 
+import com.mnnit.server.Defaults;
+import com.mnnit.server.ui.PrivateChatFrame;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class User {
     private boolean online;
     private boolean idle;
     private boolean writing;
-    
+    private PrivateChatFrame frame;
     /** Blocked List */
     List<User> blocked;
     
@@ -36,7 +38,7 @@ public class User {
         this.ipAddress = "unknown";
         this.operatingSystem = "unkonwn";
         this.me = false;
-        this.privateChatPort = 0;
+        this.privateChatPort = Defaults.private_chat_port;
         this.online = true;
         this.idle = false;
         this.writing = false;
@@ -148,5 +150,14 @@ public class User {
     public void setPrivateChatPort(int port)
     {
         privateChatPort = port;
+    }
+    
+    public void setPrivateChatFrame(PrivateChatFrame frame)
+    {
+        this.frame = frame;
+    }
+
+    public PrivateChatFrame getPrivateChatFrame() {
+        return frame;
     }
 }

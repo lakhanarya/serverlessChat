@@ -35,4 +35,8 @@ public class UserListListener {
     public void userNickChanged(User user, int ind) {
         listModel.setElementAt(user, ind);
     }
+
+    public void userAway(User user) {
+        
+    }
 }

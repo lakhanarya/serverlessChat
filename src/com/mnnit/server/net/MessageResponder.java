@@ -77,4 +77,14 @@ public class MessageResponder {
         resource.getUserListController().removeUser(user);
         resource.getMainChatController().writeToMainChat(nick + " Logged off");
     }
+
+    void userIdle(String nick) {
+        User user = resource.getUserListController().getUserByNick(nick);
+        resource.getMainChatController().writeToMainChat(nick + " went away");
+    }
+    
+    void userBack (String nick) {
+        User user = resource.getUserListController().getUserByNick(nick);
+        resource.getMainChatController().writeToMainChat(nick + " came back");
+    }
 }

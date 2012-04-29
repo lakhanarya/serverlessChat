@@ -15,7 +15,7 @@ public class AboutFrame extends javax.swing.JFrame {
      */
     public AboutFrame() { 
         initComponents();
-        System.out.println("In here");
+
     }
 
     /**

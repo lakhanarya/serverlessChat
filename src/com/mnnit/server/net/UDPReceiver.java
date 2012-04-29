@@ -3,6 +3,7 @@ package com.mnnit.server.net;
 
 import com.mnnit.server.event.ReceiverListener;
 import com.mnnit.server.Defaults;
+import com.mnnit.server.ui.PrivateChatFrame;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -19,7 +20,9 @@ public class UDPReceiver implements Runnable{
     private DatagramSocket udpSocket;
     private Thread th;
     private ReceiverListener listener;
+    private PrivateChatFrame frame;
     
+
     public void startUDPReceiver()
     {
 		if ( connected )
@@ -79,7 +82,7 @@ public class UDPReceiver implements Runnable{
                 String ip = packet.getAddress().getHostAddress();
                 String message = new String( packet.getData() ).trim();
                 if(listener!=null)
-                listener.messageReceived(message, ip);
+                listener.udpMessageReceived(message, ip);
             } catch (IOException ex) {
                 Logger.getLogger(UDPReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }

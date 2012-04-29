@@ -4,12 +4,18 @@
  */
 package com.mnnit.server.ui;
 
+import com.mnnit.server.model.Settings;
 import com.mnnit.server.model.SingletonUIResource;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
@@ -145,71 +151,71 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    
-    public MainFrame() {
-        initComponents();
-        Runtime.getRuntime().addShutdownHook( new Thread( "ControllerShutdownHook" )
-		{
-			@Override
-			public void run()
-			{
-				logOff(  );
-							}
-		} );
-        resource = new SingletonUIResource(mainChatArea, jTextField1, userList);
-        
-        resource.getNetworkController().logOn();
-        
-        
-        /* adding the mouse listener to the list */
-        userList.addMouseListener(new MouseAdapter() {
-               public void mousePressed(MouseEvent e)
-               {
-                   if(e.isPopupTrigger())
-                       doPop(e);
-               }
-               
-               public void mouseReleased(MouseEvent e)
-               {
-                   if(e.isPopupTrigger())
-                       doPop(e);
-               }
-               
-               public void doPop(MouseEvent e)
-               {
-                   PopUpMenu popUpMenu =  new PopUpMenu();
-                   popUpMenu.showUser(e.getComponent(), e.getX(), e.getY() , userSelected);
-               }
-            });       
-               ListSelectionListener listSelectionListener = new ListSelectionListener() {
+    public static LookAndFeelInfo getLookAndFeel( final String lnfName )
+	{
+		LookAndFeelInfo[] lookAndFeels = UIManager.getInstalledLookAndFeels();
 
-                @Override
-                public void valueChanged(ListSelectionEvent e) {
-                    /** Get the particular element selected and act on it accordingly 
-                     *  This method is still under Beta Phase and does not have any
-                     *  reliability associated with it .This is sparta !!
-                     */
-                    System.out.println("first selection : " + e.getFirstIndex());
-                    System.out.println("last selection : " + e.getLastIndex());
-                    
-                    boolean adjust = e.getValueIsAdjusting();
-                    System.out.println(" adjusting ? "+ adjust);
-                    if(!adjust)
+		for ( LookAndFeelInfo lookAndFeelInfo : lookAndFeels )
+		{
+			if ( lookAndFeelInfo.getName().equals( lnfName ) )
+			{
+				return lookAndFeelInfo;
+			}
+		}
+
+		return null;
+	}
+    public MainFrame() {
+        try {
+            initComponents();
+            LookAndFeelInfo lookAndFeel = getLookAndFeel( "Windows" );
+
+            if ( lookAndFeel != null )
+                UIManager.setLookAndFeel( lookAndFeel.getClassName() );
+            
+            Runtime.getRuntime().addShutdownHook( new Thread( "ControllerShutdownHook" )
                     {
-                        JList list = (JList) e.getSource() ;
-                        int selections[] = list.getSelectedIndices() ;
-                        Object selectionvalues[] = list.getSelectedValues() ;
-                        for(int i = 0 ; i< selections.length ; i++)
+                            @Override
+                            public void run()
+                            {
+                                    logOff(  );
+                                                            }
+                    } );
+            resource = new SingletonUIResource(mainChatArea, jTextField1, userList);
+            
+            resource.getNetworkController().logOn();
+                   ListSelectionListener listSelectionListener = new ListSelectionListener() {
+
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        /** Get the particular element selected and act on it accordingly 
+                         *  This method is still under Beta Phase and does not have any
+                         *  reliability associated with it .This is sparta !!
+                         */
+                        boolean adjust = e.getValueIsAdjusting();
+                        if(!adjust)
                         {
-                            if(i==0)
-                                System.out.println("Selections :");
-                            System.out.println(selections[i]+ "/"+ selectionvalues[i]);
-                            userSelected = (String) selectionvalues[i];
+                            JList list = (JList) e.getSource() ;
+                            int selections[] = list.getSelectedIndices() ;
+                            Object selectionvalues[] = list.getSelectedValues() ;
+                            for(int i = 0 ; i< selections.length ; i++)
+                            {
+                                userSelected = selectionvalues[i].toString();
+                                System.out.println(userSelected);
+                            }
                         }
                     }
-                }
-            };
-            userList.addListSelectionListener(listSelectionListener);
+                };
+                userList.addListSelectionListener(listSelectionListener);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void populateUserList(DefaultListModel listModel)
@@ -219,11 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
         else 
             userList.setModel(listModel);
     }
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -253,6 +255,14 @@ public class MainFrame extends javax.swing.JFrame {
         mainChatArea.setRows(5);
         jScrollPane1.setViewportView(mainChatArea);
 
+        userList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                userListMouseReleased(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                userListMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(userList);
 
         jTextField1.setMaximumSize(new java.awt.Dimension(6, 2147483647));
@@ -281,6 +291,11 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu.add(clearChatMenuItem);
 
         setAwayChatItem.setText("Set Away");
+        setAwayChatItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAwayChatItemActionPerformed(evt);
+            }
+        });
         toolsMenu.add(setAwayChatItem);
 
         settingsChatItem.setText("change nick");
@@ -364,7 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
         Thread th = new Thread(){
                 public void run()
                 {
-                      JFrame settingsFrame = new SettingsFrame();
+                      JFrame settingsFrame = new NickChangeFrame(Settings.getSettings().getMe().getNick(), resource);
                       settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                       settingsFrame.setVisible(true);
                 }
@@ -376,15 +391,61 @@ public class MainFrame extends javax.swing.JFrame {
 
         resource.getChatTextFieldController().parseAndActOnMessage();
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void setAwayChatItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAwayChatItemActionPerformed
+      if(!away)
+      {
+          away = true;
+          resource.getMainChatController().writeToMainChat("You went away");
+        resource.getNetworkController().sendIdleMessage();
+        resource.getUserListController().setAway(Settings.getSettings().getMe().getCode(), true);
+      }
+      else
+      {
+          away = false;
+          resource.getMainChatController().writeToMainChat("You came back");
+          resource.getNetworkController().sendBackMessage();
+          resource.getUserListController().setAway(Settings.getSettings().getMe().getCode(), false);
+      }
+    }//GEN-LAST:event_setAwayChatItemActionPerformed
+
+    private void userListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMousePressed
+                Point p = evt.getPoint();
+			int index = userList.locationToIndex( p );
+
+			if ( index != -1 )
+			{
+				Rectangle r = userList.getCellBounds( index, index );
+
+				if ( r.x <= p.x && p.x <= r.x + r.width && r.y <= p.y && p.y <= r.y + r.height )
+				{
+					userList.setSelectedIndex( index );
+				}
+
+				else
+				{
+					userList.clearSelection();
+				}
+			}        
+                    if(evt.isPopupTrigger()&&!userList.isSelectionEmpty())
+                    {      PopUpMenu popUpMenu =  new PopUpMenu();
+                       popUpMenu.showUser(evt.getComponent(), evt.getX(), evt.getY() , userSelected);}
+    }//GEN-LAST:event_userListMousePressed
+
+    private void userListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseReleased
+        if(evt.isPopupTrigger()&&!userList.isSelectionEmpty())
+                    {      PopUpMenu popUpMenu =  new PopUpMenu();
+                       popUpMenu.showUser(evt.getComponent(), evt.getX(), evt.getY() , userSelected);}
+    }//GEN-LAST:event_userListMouseReleased
     
     private void logOff()
     {
-        resource.getNetworkController().sendLogoffMessage();
-        
+        resource.getNetworkController().sendLogoffMessage();       
     }
     
     private String userSelected = null ;
     private SingletonUIResource resource;
+    private boolean away = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutChatItem;
     private javax.swing.JMenuItem clearChatMenuItem;

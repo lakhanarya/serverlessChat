@@ -73,6 +73,8 @@ public class UserListController {
         {
             user.setIdle(away);
         }
+        if(listener!=null)
+            listener.userAway(user);
     }
     
     public User getUserByCode(final int code)

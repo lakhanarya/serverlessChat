@@ -78,6 +78,12 @@ public class Messages {
         networkService.sendMulticastMessage(msg);
     }
     
+    public void sendPrivateMsg(String message, String ip)
+    {
+        String msg = createMessage("PRIVCHAT") + ":" + message;
+        networkService.sendUDPMsg(msg, ip, me.getPrivateChatPort());
+    }
+    
     public void sendClientMsg()
     {
        
